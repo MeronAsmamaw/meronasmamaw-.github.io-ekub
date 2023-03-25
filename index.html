@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ekub</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+  
+    <script>
+        let lotteryMembers = [];
+
+        function addLotteryMember() {
+            // Get the form input values
+            const name = document.getElementById("name").value;
+            const phoneNumber = document.getElementById("phone-number").value;
+            const Amount = document.getElementById("birr").value;
+
+            // Create a new lottery member object
+            const newMember = {
+                id: lotteryMembers.length + 1,
+                name,
+                phoneNumber,
+                Amount
+            };
+
+            // Add the new member to the array
+            lotteryMembers.push(newMember);
+
+            // Clear the form input fields
+            document.getElementById("name").value = "";
+            document.getElementById("phone-number").value = "";
+            document.getElementById("birr").value = "";
+
+            // Update the table with the new member data
+            const table = document.getElementById("lottery-table");
+            const row = table.insertRow(-1);
+            const idCell = row.insertCell(0);
+            const nameCell = row.insertCell(1);
+            const AmountCell = row.insertCell(2);
+            const phoneCell = row.insertCell(3);
+            idCell.innerHTML = newMember.id;
+            nameCell.innerHTML = newMember.name;
+            AmountCell.innerHTML = newMember.Amount;
+            phoneCell.innerHTML = newMember.phoneNumber;
+        }
+
+        function pickWinner() {
+            const numMembers = lotteryMembers.length;
+
+            // Check if there are any members in the lottery
+            if (numMembers === 0) {
+                alert("There are no members in the lottery.");
+                return;
+            }
+
+            // Generate a random index to select the winner
+            const randomIndex = Math.floor(Math.random() * numMembers);
+
+            // Get the winner and display the result
+            const winner = lotteryMembers[randomIndex];
+            alert(`The winner is ${winner.name} with phone number ${winner.phoneNumber}.`);
+
+            // Remove the winner from the array and table
+            lotteryMembers.splice(randomIndex, 1);
+            const table = document.getElementById("lottery-table");
+            table.deleteRow(randomIndex + 1);
+        }
+    </script>
+
+</head>
+  <body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <header class="d-flex flex-wrap justify-content-center py-3 mb-4 bg-dark">
+        <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+          <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
+          <span class="fs-4 text-white">Ethekub</span>
+        </a>
+  
+        <ul class="nav nav-pills">
+          <li class="nav-item"><a href="#" class="nav-link active text-white" aria-current="page">Home</a></li>
+          <li class="nav-item"><a href="#" class="nav-link text-white">Name</a></li>
+          <li class="nav-item"><a href="#" class="nav-link text-white">Amount</a></li>
+          <li class="nav-item"><a href="#" class="nav-link text-white">Winner</a></li>
+          <li class="nav-item"><a href="#" class="nav-link text-white">Sign Up</a></li>
+        </ul>
+        </header>  
+
+        <div class="container-fluid my-5">
+            <div class="row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3 border shadow-lg">
+                    <div class="containe-fluid">
+                        <div class="row">
+                            <div class="col-md-4 col-sm-12">
+                                <form class="form-control">
+                                    <div class="mb-3">
+                                        <label for="names" class="form-label">Full Name</label>
+                                        <input type="text" class="form-control" id="name" name="name">
+                                        
+                                    </div>
+                                     <div class="mb-3">
+                                        <label for="names" class="form-label">Amount</label>
+                                        <input type="number" class="form-control" id="birr" name="name">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="phone" class="form-label">Phone</label>
+                                        <input type="phone-number" class="form-control" id="phone-number" name="phone-number">
+                                    </div>
+                                
+                                   
+    <button type="button" onclick="addLotteryMember()" class="btn btn-primary btn-align-center col-md-4 col-sm-12 text-center" id="btn">Add</button>
+                                    <button type="button" onclick="pickWinner()" class="btn btn-primary btn-align-center col-md-4 col-sm-12 text-center" id="Btn">Pick winner</button>
+
+                                    <hr class="my-4">
+                                    <small class="text-muted">Thanks for Ethekub member</small>
+                                    <div>                   
+                                    </div>
+                                </form>
+                                <br>
+                                <div class="container">
+                                    <div class="row">
+                    
+                    <div class="col-md-6 col-sm-12">
+                    </div>
+                    
+                                    </div>
+                                </div>
+                    
+                            </div>
+                            <!--  -->
+                            <div class="col-md-8">
+                                <table class="table" id="lottery-table">
+                                      <tr >
+                                        <th scope="col">ID</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Amount</th>
+                                        <th scope="col">Phone</th>
+                                      </tr>
+                                    <tbody >    
+                                      </tbody>
+                                </table>    
+                            </div>
+                        </div>
+                    </div>
+                    
+                  </div>
+              </div>    
+        </div>
+
+</body>
+</html>
